@@ -1,0 +1,9 @@
+The solution involved a multi-pronged approach:
+
+1. **Dependency Updates:**  Ensuring all dependencies, including Expo and React Native, were up-to-date addressed some compatibility issues and resolved some underlying bundler problems. This was done by running `expo upgrade` and then `npm install` or `yarn install`.
+2. **Explicit Module Resolution:**  Instead of relying solely on implicit module resolution, we used explicit paths when importing modules. This reduced ambiguity and prevented the bundler from misinterpreting module locations. For example, changed `import MyComponent from 'my-component';` to `import MyComponent from './components/MyComponent';`
+3. **Metro Config:** We made some adjustments to the `metro.config.js` file to customize the bundler's behavior. This included adding resolver options to improve module resolution accuracy and potentially include additional extensions.  For example, adding a resolver extension in metro.config.js for a specific file extension
+4. **Clean and Rebuild:** Thoroughly cleaning the project cache and rebuilding from scratch proved helpful in many cases. This was done using commands like `expo prebuild --clean` and deleting the `node_modules` folder followed by reinstalling dependencies.
+5. **Detailed Logging:** Increased logging level in Expo's debug output helped to surface more information during the build process. It provided more detailed error reporting and insights into where issues were occurring during the bundler stage.  This usually involved adding more logging commands during specific parts of the process to track down the cause.
+
+By combining these strategies, the intermittent Metro bundler errors were significantly reduced, resulting in a more stable and reliable build process.
